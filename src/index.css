@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Share Tech Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-cyber-yellow: #fcee0a;
+  --color-cyber-cyan: #00f0ff;
+  --color-cyber-magenta: #ff003c;
+  --color-cyber-black: #050505;
+  --color-cyber-gray: #1a1a1a;
+  --color-cyber-light: #e0e0e0;
+}
+
+@layer base {
+  :root {
+    --background: #050505;
+    --foreground: #e0e0e0;
+    --primary: #fcee0a; /* Cyber Yellow */
+    --primary-foreground: #050505;
+    --secondary: #00f0ff; /* Cyber Cyan */
+    --accent: #ff003c; /* Cyber Magenta */
+    --card: #1a1a1a;
+    --card-foreground: #e0e0e0;
+    --border: #333333;
+  }
+
+  /* Force dark mode for Cyberpunk theme */
+  .dark {
+    --background: #050505;
+    --foreground: #e0e0e0;
+    --primary: #fcee0a;
+    --primary-foreground: #050505;
+    --secondary: #00f0ff;
+    --accent: #ff003c;
+    --card: #1a1a1a;
+    --card-foreground: #e0e0e0;
+    --border: #333333;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: -1px -1px;
+}
+
+/* Cyberpunk Glitch Effect */
+.glitch-text {
+  position: relative;
+  color: white;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--accent);
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--secondary);
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 83px, 0); }
+  20% { clip: rect(62px, 9999px, 14px, 0); }
+  40% { clip: rect(34px, 9999px, 55px, 0); }
+  60% { clip: rect(89px, 9999px, 98px, 0); }
+  80% { clip: rect(21px, 9999px, 42px, 0); }
+  100% { clip: rect(76px, 9999px, 33px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(12px, 9999px, 54px, 0); }
+  40% { clip: rect(87px, 9999px, 23px, 0); }
+  60% { clip: rect(43px, 9999px, 76px, 0); }
+  80% { clip: rect(98px, 9999px, 11px, 0); }
+  100% { clip: rect(34px, 9999px, 88px, 0); }
+}
+
+/* Cyberpunk Button */
+.cyber-button {
+  position: relative;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: none;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+  transition: all 0.2s ease;
+}
+
+.cyber-button:hover {
+  background: var(--secondary);
+  color: var(--background);
+  box-shadow: 0 0 15px var(--secondary);
+}
+
+.cyber-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+/* Cyberpunk Card */
+.cyber-card {
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid var(--secondary);
+  border-left: 4px solid var(--primary);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 30px;
+  height: 30px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+}
+
+.cyber-card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  width: 30px;
+  height: 30px;
+  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--accent);
+}
+
+/* Cyberpunk Input */
+.cyber-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+  border-bottom: 2px solid var(--secondary);
+  color: var(--secondary);
+  font-family: var(--font-mono);
+  transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(252, 238, 10, 0.2);
+}
+
+/* Cyberpunk Badge/Tag */
+.cyber-badge {
+  background: rgba(255, 0, 60, 0.2);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
